@@ -5,15 +5,19 @@
 
 import person
 import random
+import matplotlib.pyplot as plt
 totalPopulation = 1000
 populationArray = list()
 numberOfRounds = 2000
 lengthOfInfection = 20
 Alpha = .005
-Beta = .01
+Beta = .05
 for x in range(totalPopulation):
   populationArray.append(person.Person(0,0))
 
+plot_round = []
+susceptible = []
+infected = []
 
 
 
@@ -45,6 +49,17 @@ for z in range(numberOfRounds):
         if populationArray[k].infectionStatus == 1:
             currentNumInfections += 1
     print("Round: "+str(z) +" -->" +str(currentNumInfections))
+    plot_round.append(z)
+    susceptible.append(totalPopulation - currentNumInfections)
+    infected.append(currentNumInfections)
+
+
+plt.xlabel('Round')
+plt.ylabel('Population')
+plt.plot(plot_round, susceptible, label = "Susceptible", color = "blue")
+plt.plot(plot_round, infected, label = "Infected", color = "red")
+plt.legend()
+plt.show()
 
 
 
